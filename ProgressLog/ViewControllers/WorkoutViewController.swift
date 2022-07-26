@@ -17,7 +17,7 @@ final class WorkoutViewController: UIViewController {
 //MARK: - Properties
     private let viewModel = SetworkoutViewModel()
     private let gradientView = GradientView()
-    private let footerView = TabFooterView()
+    private let footerView = MuscleFooterView()
     private let headerView = DatePickView()
     private let setWorkoutView = SetWorkoutView()
     private let disposeBag = DisposeBag()

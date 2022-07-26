@@ -8,6 +8,7 @@
 import UIKit
 
 class MuscleFooterView: UIView {
+    let gradientView = SecondGradientView()
     
     let homeView = MuscleFooterButton(frame: .zero, width: 50, imageName: "house.fill")
     let chartView = MuscleFooterButton(frame: .zero, width: 50, imageName: "chart.bar.xaxis")
@@ -17,8 +18,9 @@ class MuscleFooterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue
-
+        clipsToBounds = true
+        gradientView.frame = UIScreen.main.bounds
+        addSubview(gradientView)
 
         let baseStackView = UIStackView(arrangedSubviews: [homeView, chartView, workoutView, menuView, boostView])
         baseStackView.axis = .horizontal
@@ -36,7 +38,8 @@ class MuscleFooterView: UIView {
 }
 
 class MuscleFooterButton: UIView {
-    
+    var label = UILabel()
+
     var button: BottomButton?
     
     init(frame: CGRect, width: CGFloat, imageName: String) {
@@ -46,7 +49,7 @@ class MuscleFooterButton: UIView {
         //UIImageを拡張メソッドでリサイズ
         button?.setImage(UIImage(systemName: imageName)?.resize(size: .init(width: width*0.6, height: width*0.6)), for: .normal)
         button?.translatesAutoresizingMaskIntoConstraints = false
-        button?.tintColor = .endColor
+        button?.tintColor = .baseColor
         button?.backgroundColor = .white
         button?.layer.cornerRadius = width/2
         button?.layer.shadowOffset = .init(width: 1.5, height: 2)
@@ -55,9 +58,17 @@ class MuscleFooterButton: UIView {
         button?.layer.shadowRadius = 15
         
         addSubview(button!)
-        
         button?.anchor(centerY: centerYAnchor, centerX: centerXAnchor, width: width, height: width)
-    }
+
+        label.text = "text"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.layer.cornerRadius = 3
+        label.layer.backgroundColor = UIColor.secondColor?.cgColor
+        label.textColor = UIColor.white
+        addSubview(label)
+        label.anchor(top: button?.bottomAnchor, centerX: centerXAnchor,  width: width, height: 14, topPadding: -10)
+            }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

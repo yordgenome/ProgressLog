@@ -32,7 +32,7 @@ final class RegisterMenuViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = SetTargetViewModel()
     private let gradientView = GradientView()
-    private let footerView = TabFooterView()
+    private let footerView = MuscleFooterView()
     private let headerView = RegisterMenuHeaderView()
     private let setTargetView = SetTargetView()
     var workoutMenuArray = [WorkoutMenu]()
