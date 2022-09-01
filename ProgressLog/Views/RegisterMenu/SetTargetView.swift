@@ -47,6 +47,7 @@ class SetTargetView: UIView, UITextFieldDelegate{
         super.init(frame: frame)
 
         self.layer.masksToBounds = true
+        targetTextField.keyboardType = UIKeyboardType.default
     }
     
     required init?(coder: NSCoder) {
@@ -60,7 +61,7 @@ class SetTargetView: UIView, UITextFieldDelegate{
         addSubview(setButton)
         gradientView.frame = UIScreen.main.bounds
 //        targetTextLabel.anchor(top: topAnchor, left: leftAnchor, width: 120, height: 12, topPadding: 10, leftPadding: 20)
-        targetTextField.anchor(top: topAnchor, left: leftAnchor, width: 140, height: 20, topPadding: 10, leftPadding: 20, rightPadding: 20)
+        targetTextField.anchor(top: topAnchor, left: leftAnchor, width: 140, height: 20, topPadding: 20, leftPadding: 20, rightPadding: 20)
         setButton.anchor(top: topAnchor, right: rightAnchor, width: 60, height: 34, topPadding: 10, rightPadding: 20)
         
     }

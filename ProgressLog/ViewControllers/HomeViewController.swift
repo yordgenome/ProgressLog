@@ -19,7 +19,8 @@ class HomeViewController: UIViewController {
     
     //MARK: - Properties
     let gradientView = GradientView()
-    let footerView = MuscleFooterView()
+    let footerView = FooterView()
+    
     
     var user: User?
     let today = Date()
@@ -58,11 +59,6 @@ class HomeViewController: UIViewController {
 //
 //    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-
-    }
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,6 +71,9 @@ class HomeViewController: UIViewController {
             self.present(nav, animated: true)
         } else {
             guard let uid = Auth.auth().currentUser?.uid else { return }
+//            Task {
+//                user = try! await UserModel.getUserFromFirestore()
+//            }
             Firestore.firestore().collection("users").document(uid).getDocument(completion: { document, error in
                 if let document = document {
                     let name = document.data()!["name"] as! String
@@ -107,25 +106,24 @@ class HomeViewController: UIViewController {
     private func setupBinding() {
         
         footerView.chartView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
-            print("555")
             let regiWorkoutVC = RegisterMenuViewController()
             regiWorkoutVC.modalPresentationStyle = .fullScreen
+            regiWorkoutVC.modalTransitionStyle  = .crossDissolve
+
             self?.present(regiWorkoutVC, animated: true)})
             .disposed(by: disposeBag)
         
         footerView.menuView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
-            print("555")
-
             let regiWorkoutVC = RegisterMenuViewController()
             regiWorkoutVC.modalPresentationStyle = .fullScreen
+            regiWorkoutVC.modalTransitionStyle  = .crossDissolve
             self?.present(regiWorkoutVC, animated: true)
         }).disposed(by: disposeBag)
         
         footerView.workoutView.button?.rx.tap.asDriver().drive { [ weak self ] _ in
-            print("555")
-
             let workoutVC = WorkoutViewController()
             workoutVC.modalPresentationStyle = .fullScreen
+            workoutVC.modalTransitionStyle  = .crossDissolve
             self?.present(workoutVC, animated: true)
         }
         .disposed(by: disposeBag)

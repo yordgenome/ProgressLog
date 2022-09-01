@@ -1,26 +1,20 @@
 //
-//  FooterView.swift
-//  ProgressLog
+//  MuscleFooterView.swift
+//  WorkoutVolumeDiary
 //
-//  Created by Yo Tahara on 2022/07/24.
+//  Created by Yo Tahara on 2022/06/10.
 //
 
 import UIKit
 
 class FooterView: UIView {
-    
     let gradientView = SecondGradientView()
-//    let homeView = TabFooterButton(frame: .zero, width: 50, imageName: "house.fill", text: "ホーム", labelWidth: 30)
-//    let chartView = TabFooterButton(frame: .zero, width: 50, imageName: "chart.bar.xaxis", text: "グラフ", labelWidth: 30)
-//    let workoutView = TabFooterButton(frame: .zero, width: 60, imageName: "rectangle.and.pencil.and.ellipsis", text: "トレーニング記録", labelWidth: 80)
-//    let noView = TabFooterButton(frame: .zero, width: 50, imageName: "heart.fill", text: "なにか", labelWidth: 30)
-//    let menuView = TabFooterButton(frame: .zero, width: 50, imageName: "cube.fill", text: "種目", labelWidth: 30)
-  
-    let homeView = FooterButton(frame: .zero, width: 50, imageName: "house.fill")
-    let chartView = FooterButton(frame: .zero, width: 50, imageName: "chart.bar.xaxis")
-    let workoutView = FooterButton(frame: .zero, width: 50, imageName: "rectangle.and.pencil.and.ellipsis")
-    let noView = FooterButton(frame: .zero, width: 50, imageName: "heart.fill")
-    let menuView = FooterButton(frame: .zero, width: 50, imageName: "cube.fill")
+    
+        let homeView = FooterButtonView(frame: .zero, width: 50, imageName: "house.fill", text: "ホーム", labelWidth: 30)
+        let chartView = FooterButtonView(frame: .zero, width: 50, imageName: "chart.bar.xaxis", text: "グラフ", labelWidth: 30)
+        let workoutView = FooterButtonView(frame: .zero, width: 50, imageName: "rectangle.and.pencil.and.ellipsis", text: "記録", labelWidth: 30)
+        let menuView = FooterButtonView(frame: .zero, width: 50, imageName: "heart.fill", text: "種目", labelWidth: 30)
+        let selfView = FooterButtonView(frame: .zero, width: 50, imageName: "cube.fill", text: "設定", labelWidth: 30)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,62 +22,61 @@ class FooterView: UIView {
         gradientView.frame = UIScreen.main.bounds
         addSubview(gradientView)
 
-        let baseStackView = UIStackView(arrangedSubviews: [homeView, chartView, workoutView, noView, menuView])
+        let baseStackView = UIStackView(arrangedSubviews: [homeView, chartView, workoutView, menuView, selfView])
         baseStackView.axis = .horizontal
         baseStackView.distribution = .fillEqually
         baseStackView.spacing = 10
         baseStackView.translatesAutoresizingMaskIntoConstraints = false
+
         addSubview(baseStackView)
-    
-        baseStackView.anchor(left: leftAnchor, right: rightAnchor, centerY: centerYAnchor, leftPadding: 10, rightPadding: 10)
+        baseStackView.anchor(top: topAnchor, bottom: bottomAnchor, left: leftAnchor, right: rightAnchor, leftPadding: 10, rightPadding: 10)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
-class FooterButton: UIView {
+class FooterButtonView: UIView {
+    var label = UILabel()
+
+    var button: FooterButton?
     
-//    var label = UILabel()
-    var button: FooterButtonItem?
-    //, text: String, labelWidth: CGFloat
-    init(frame: CGRect, width: CGFloat, imageName: String) {
+    init(frame: CGRect, width: CGFloat, imageName: String, text: String, labelWidth: CGFloat) {
         super.init(frame: frame)
         
-        button = FooterButtonItem(type: .system)
+        clipsToBounds = false
+        
+        button = FooterButton(type: .system)
         //UIImageを拡張メソッドでリサイズ
-        button?.setImage(UIImage(systemName: imageName)?.resize(size: .init(width: width*0.6, height: width*0.6)), for: .normal)
+        button?.setImage(UIImage(systemName: imageName)?.resize(size: .init(width: width*0.7, height: width*0.7)), for: .normal)
         button?.translatesAutoresizingMaskIntoConstraints = false
-        button?.tintColor = .baseColor
-        button?.backgroundColor = .white
-        button?.layer.cornerRadius = width/2
-        button?.layer.borderColor = UIColor.baseColor?.cgColor
-        button?.layer.borderWidth = 1
+        button?.tintColor = .white
+        button?.backgroundColor = .baseColor
+        button?.layer.cornerRadius = 10
         button?.layer.shadowOffset = .init(width: 1.5, height: 2)
         button?.layer.shadowColor = UIColor.black.cgColor
         button?.layer.shadowOpacity = 0.5
         button?.layer.shadowRadius = 15
         
-//        label.text = text
-//        label.textAlignment = .center
-//        label.font = UIFont.systemFont(ofSize: 10)
-//        label.layer.cornerRadius = 3
-//        label.layer.backgroundColor = UIColor.secondColor?.cgColor
-//        label.textColor = UIColor.white
-
         addSubview(button!)
-//        addSubview(label)
-        
-        button?.anchor(centerY: centerYAnchor, centerX: centerXAnchor, width: width, height: width)
-//        label.anchor(top: button?.bottomAnchor, centerX: centerXAnchor,  width: labelWidth, height: 14, topPadding: -10)
-    }
+        button?.anchor(top: topAnchor, centerX: centerXAnchor, width: width, height: width, topPadding: 10)
+
+        label.text = text
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 10)
+
+        addSubview(label)
+        label.anchor(bottom: button!.bottomAnchor, centerX: centerXAnchor,  width: labelWidth, height: 14)
+}
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-class FooterButtonItem: UIButton {
+class FooterButton: UIButton {
     
     //ボタンを押しているときに縮小拡大するアニメーション
     override var isHighlighted: Bool {
@@ -109,5 +102,5 @@ class FooterButtonItem: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
-

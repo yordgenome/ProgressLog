@@ -17,7 +17,7 @@ final class WorkoutViewController: UIViewController {
 //MARK: - Properties
     private let viewModel = SetworkoutViewModel()
     private let gradientView = GradientView()
-    private let footerView = MuscleFooterView()
+    private let footerView = FooterView()
     private let headerView = DatePickView()
     private let setWorkoutView = SetWorkoutView()
     private let disposeBag = DisposeBag()
@@ -32,9 +32,9 @@ final class WorkoutViewController: UIViewController {
     private let todaysVolumeLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .white
-        label.backgroundColor = .endColor
-        label.font = UIFont(name: "GeezaPro-Bold", size: 16)
+        label.textColor = .outColor
+        label.backgroundColor = .white
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
@@ -56,6 +56,10 @@ final class WorkoutViewController: UIViewController {
         if workoutMenuArray.isEmpty {
             setupWorkoutMenu()
         }
+        
+        todaysVolumeLabel.text = workoutData.map {$0.volume}.reduce(0) {
+            (num1: Double, num2: Double) -> Double in num1 + num2
+        }.description
   
         currentDate = DateUtils.toDateFromString(string: headerView.dateTextField.text!)
         workoutTableView.delegate = self
@@ -136,7 +140,7 @@ final class WorkoutViewController: UIViewController {
         todaysVolumeLabel.anchor(top: headerView.bottomAnchor, centerX: view.centerXAnchor, width: view.frame.width, height: 18)
         setWorkoutView.anchor(top: todaysVolumeLabel.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 100)
         workoutTableView.anchor(top: setWorkoutView.bottomAnchor, bottom: footerView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.bounds.width, topPadding: 5, bottomPadding: 5)
-        footerView.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 120)
+        footerView.anchor(bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 80)
     }
 
     private func totalVolume() -> Double {
@@ -151,8 +155,7 @@ final class WorkoutViewController: UIViewController {
     
 //MARK: - Bindings
     private func setupBindings() {
-        
-        
+
         SetupTextFields()
         // 日付処理
         headerView.dateTextField.rx.text.asDriver().drive { [weak self] text in
@@ -162,14 +165,20 @@ final class WorkoutViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
+        // 前日
         headerView.previousDayButton.rx.tap.asDriver().drive { [weak self] _ in
             guard let self = self else { return }
             self.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: self.currentDate!)!
             self.headerView.dateTextField.text = DateUtils.toStringFromDate(date: self.currentDate!)
             self.getWorkoutData(dateString: self.headerView.dateTextField.text!)
 
+            self.todaysVolumeLabel.text = self.workoutData.map {$0.volume}.reduce(0) {
+                (num1: Double, num2: Double) -> Double in num1 + num2
+            }.description
+            
         }.disposed(by: disposeBag)
 
+        // 翌日
         headerView.nextDayButton.rx.tap.asDriver().drive { [weak self] _ in
             guard let self = self else { return }
             if self.currentDate == DateUtils.toDateFromString(string: DateUtils.toStringFromDate(date: Date())) {
@@ -177,6 +186,9 @@ final class WorkoutViewController: UIViewController {
             } else {
                 self.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: self.currentDate!)!
                 self.headerView.dateTextField.text = DateUtils.toStringFromDate(date: self.currentDate!)
+                self.todaysVolumeLabel.text = self.workoutData.map {$0.volume}.reduce(0) {
+                    (num1: Double, num2: Double) -> Double in num1 + num2
+                }.description
             }
             self.getWorkoutData(dateString: self.headerView.dateTextField.text!)
         }.disposed(by: disposeBag)
@@ -191,6 +203,9 @@ final class WorkoutViewController: UIViewController {
             let workout = WorkoutModel(doneAt: Timestamp(date: self.currentDate!), targetPart: targetPart, workoutName: workoutName, weight: weight, reps: reps, volume: weight*Double(reps))
             self.workoutData.append(workout)
             self.workoutTableView.reloadData()
+            self.todaysVolumeLabel.text = self.workoutData.map {$0.volume}.reduce(0) {
+                (num1: Double, num2: Double) -> Double in num1 + num2
+            }.description
             self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
             print(self.workoutData)
             Task { do { try await UserModel.setWorkoutToFirestore(workout: self.workoutData, dateString: DateUtils.toStringFromDate(date: self.currentDate!))
@@ -205,19 +220,23 @@ final class WorkoutViewController: UIViewController {
             self.setWorkoutView.repsTextField.text = ""
             self.setWorkoutView.weightTextField.text = ""
         }.disposed(by: disposeBag)
-        
-        setWorkoutView.workoutNameTextField.rx.text
-            .asDriver()
-            .drive { [weak self] text in
-                self?.viewModel.workoutNameTextInput.onNext(text ?? "")
-            }
-            .disposed(by: disposeBag)
-        
+
         setWorkoutView.targetPartTextField.rx.text
             .asDriver()
             .drive { [weak self] text in
                 self?.setWorkoutView.workoutNameTextField.text = ""
+                self?.setWorkoutView.repsTextField.text = ""
+                self?.setWorkoutView.weightTextField.text = ""
                 self?.viewModel.targetPartTextInput.onNext(text ?? "")
+            }
+            .disposed(by: disposeBag)
+        
+        setWorkoutView.workoutNameTextField.rx.text
+            .asDriver()
+            .drive { [weak self] text in
+                self?.setWorkoutView.repsTextField.text = ""
+                self?.setWorkoutView.weightTextField.text = ""
+                self?.viewModel.workoutNameTextInput.onNext(text ?? "")
             }
             .disposed(by: disposeBag)
         
@@ -247,6 +266,7 @@ final class WorkoutViewController: UIViewController {
         footerView.homeView.button?.rx.tap.asDriver().drive { [ weak self ] _ in
             let homeVC = HomeViewController()
             homeVC.modalPresentationStyle = .fullScreen
+            homeVC.modalTransitionStyle = .crossDissolve
             self?.present(homeVC, animated: true)
         }
         .disposed(by: disposeBag)
@@ -254,6 +274,7 @@ final class WorkoutViewController: UIViewController {
         footerView.menuView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
             let regiWorkoutVC = RegisterMenuViewController()
             regiWorkoutVC.modalPresentationStyle = .fullScreen
+            regiWorkoutVC.modalTransitionStyle = .crossDissolve
             self?.present(regiWorkoutVC, animated: true)
         }).disposed(by: disposeBag)
                                                  
@@ -362,6 +383,8 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         cell.weightLabel.text = workoutData[indexPath.section].weight.description + "KG"
         cell.repsLabel.text = workoutData[indexPath.section].reps.description + "回"
         cell.TotalVolumeLabel.text = workoutData[indexPath.section].volume.description + "KG"
+
+        
         cell.selectionStyle = .none
         
         return cell

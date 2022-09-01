@@ -23,8 +23,6 @@
 		A1023CA1288584DF000AB818 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA0288584DF000AB818 /* WorkoutModel.swift */; };
 		A1023CA328858532000AB818 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA228858532000AB818 /* User.swift */; };
 		A1023CA8288585C9000AB818 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA7288585C9000AB818 /* GradientView.swift */; };
-		A1023CAA28858608000AB818 /* GradientAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA928858608000AB818 /* GradientAnimationView.swift */; };
-		A1023CAC28858677000AB818 /* TabFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CAB28858677000AB818 /* TabFooterView.swift */; };
 		A1023CAE288586DB000AB818 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CAD288586DB000AB818 /* SignUpViewController.swift */; };
 		A1023CB12885871A000AB818 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB028858719000AB818 /* RegisterViewModel.swift */; };
 		A1023CB328858785000AB818 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB228858785000AB818 /* LoginViewController.swift */; };
@@ -52,8 +50,7 @@
 		A1023CE3288700EE000AB818 /* SecondGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CE2288700EE000AB818 /* SecondGradientView.swift */; };
 		A1023CE72889A5B0000AB818 /* WorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CE62889A5AF000AB818 /* WorkoutCell.swift */; };
 		A1023CE92889A89B000AB818 /* CellBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CE82889A89B000AB818 /* CellBackgroundView.swift */; };
-		A1023CEB288CA75F000AB818 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CEA288CA75F000AB818 /* FooterView.swift */; };
-		A1936D82289024C100315381 /* MuscleFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1936D81289024C100315381 /* MuscleFooterView.swift */; };
+		A1936D82289024C100315381 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1936D81289024C100315381 /* FooterView.swift */; };
 		C33392F1D5FF3C75A960AB9A /* Pods_ProgressLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE5C8503AE71D1BB1D1BF62 /* Pods_ProgressLog.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,8 +100,6 @@
 		A1023CA0288584DF000AB818 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		A1023CA228858532000AB818 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1023CA7288585C9000AB818 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		A1023CA928858608000AB818 /* GradientAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientAnimationView.swift; sourceTree = "<group>"; };
-		A1023CAB28858677000AB818 /* TabFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabFooterView.swift; sourceTree = "<group>"; };
 		A1023CAD288586DB000AB818 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A1023CB028858719000AB818 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		A1023CB228858785000AB818 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -129,8 +124,7 @@
 		A1023CE2288700EE000AB818 /* SecondGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGradientView.swift; sourceTree = "<group>"; };
 		A1023CE62889A5AF000AB818 /* WorkoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCell.swift; sourceTree = "<group>"; };
 		A1023CE82889A89B000AB818 /* CellBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
-		A1023CEA288CA75F000AB818 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
-		A1936D81289024C100315381 /* MuscleFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleFooterView.swift; sourceTree = "<group>"; };
+		A1936D81289024C100315381 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		AD5C39408399D51873A4F729 /* Pods-ProgressLog-ProgressLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressLog-ProgressLogUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAE5C8503AE71D1BB1D1BF62 /* Pods_ProgressLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProgressLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA55ECA4D54147ADDAC767E /* Pods-ProgressLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressLog.release.xcconfig"; path = "Target Support Files/Pods-ProgressLog/Pods-ProgressLog.release.xcconfig"; sourceTree = "<group>"; };
@@ -303,11 +297,8 @@
 			children = (
 				A1023CA7288585C9000AB818 /* GradientView.swift */,
 				A1023CE2288700EE000AB818 /* SecondGradientView.swift */,
-				A1023CA928858608000AB818 /* GradientAnimationView.swift */,
-				A1023CAB28858677000AB818 /* TabFooterView.swift */,
 				A1023CE82889A89B000AB818 /* CellBackgroundView.swift */,
-				A1023CEA288CA75F000AB818 /* FooterView.swift */,
-				A1936D81289024C100315381 /* MuscleFooterView.swift */,
+				A1936D81289024C100315381 /* FooterView.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -604,18 +595,15 @@
 				A1023CD828858CC0000AB818 /* UserModel.swift in Sources */,
 				A1023CA328858532000AB818 /* User.swift in Sources */,
 				A1023C97288580F1000AB818 /* UserDefaults-Extension.swift in Sources */,
-				A1023CEB288CA75F000AB818 /* FooterView.swift in Sources */,
-				A1936D82289024C100315381 /* MuscleFooterView.swift in Sources */,
+				A1936D82289024C100315381 /* FooterView.swift in Sources */,
 				A1023C99288582E1000AB818 /* DateUtils.swift in Sources */,
 				A1023CC32885893E000AB818 /* DatePickView.swift in Sources */,
-				A1023CAC28858677000AB818 /* TabFooterView.swift in Sources */,
 				A1023CB12885871A000AB818 /* RegisterViewModel.swift in Sources */,
 				A1023CCC28858A9F000AB818 /* RegisterMenuTableViewVHeader.swift in Sources */,
 				A1023CCA288589F7000AB818 /* RegisterMenuViewController.swift in Sources */,
 				A1023CD028858B95000AB818 /* RegisterMenuHeaderView.swift in Sources */,
 				A1023CCE28858B1F000AB818 /* RegisterMenuCell.swift in Sources */,
 				A1023CA8288585C9000AB818 /* GradientView.swift in Sources */,
-				A1023CAA28858608000AB818 /* GradientAnimationView.swift in Sources */,
 				A1023CD628858C56000AB818 /* SetTargetViewModel.swift in Sources */,
 				A1023CD428858C44000AB818 /* SetWorkoutViewModel.swift in Sources */,
 				A1023CC52885896E000AB818 /* SetWorkoutView.swift in Sources */,

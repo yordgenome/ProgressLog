@@ -32,7 +32,7 @@ final class RegisterMenuViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = SetTargetViewModel()
     private let gradientView = GradientView()
-    private let footerView = MuscleFooterView()
+    private let footerView = FooterView()
     private let headerView = RegisterMenuHeaderView()
     private let setTargetView = SetTargetView()
     var workoutMenuArray = [WorkoutMenu]()
@@ -48,6 +48,8 @@ final class RegisterMenuViewController: UIViewController {
         view.backgroundColor = .accentColor
         
         workoutMenuArray = UserDefaults.standard.getWorkoutMenu("WorkoutMenu") ?? []
+        setTargetView.targetTextField.delegate = self
+        setTargetView.targetTextField.keyboardType = UIKeyboardType.default
         
         if workoutMenuArray.isEmpty {
             setupWorkoutMenu()
@@ -75,13 +77,15 @@ final class RegisterMenuViewController: UIViewController {
     }
     
     private func setupWorkoutMenu() {
-        workoutMenuArray.append(WorkoutMenu(target: "胸", menu: ["ベンチプレス", "ダンベルフライ", "ディップス"]))
-        workoutMenuArray.append(WorkoutMenu(target: "肩", menu: ["ショルダープレス", "サイドレイズ", "リアレイズ"]))
-        workoutMenuArray.append(WorkoutMenu(target: "腕", menu: ["アームカール", "ハンマーカール", "スカルクラッシャー"]))
-        workoutMenuArray.append(WorkoutMenu(target: "背", menu: ["ラットプルダウン", "ベントオーバーロウ", "バックエクステンション"]))
-        workoutMenuArray.append(WorkoutMenu(target: "脚", menu: ["スクワット", "レッグエクステンション", "レッグカール"]))
-        workoutMenuArray.append(WorkoutMenu(target: "腹", menu: ["シットアップ", "ツイストシットアップ", "レッグレイズ"]))
-        workoutMenuArray.append(WorkoutMenu(target: "他", menu: []))
+        workoutMenuArray.append(WorkoutMenu(target: "大胸筋", menu: ["ベンチプレス", "ダンベルフライ", "ディップス"]))
+        workoutMenuArray.append(WorkoutMenu(target: "三角筋", menu: ["ショルダープレス", "サイドレイズ", "リアレイズ"]))
+        workoutMenuArray.append(WorkoutMenu(target: "上腕二頭筋", menu: ["アームカール", "ハンマーカール"]))
+        workoutMenuArray.append(WorkoutMenu(target: "上腕三頭筋", menu: ["トライセプスキックバック", "フレンチプレス", "スカルクラッシャー"]))
+        workoutMenuArray.append(WorkoutMenu(target: "広背筋", menu: ["ラットプルダウン", "ベントオーバーロウ", "ワンハンドロウ"]))
+        workoutMenuArray.append(WorkoutMenu(target: "脊柱起立筋", menu: ["バックエクステンション"]))
+        workoutMenuArray.append(WorkoutMenu(target: "下半身", menu: ["スクワット", "レッグエクステンション", "レッグカール", "カーフレイズ"]))
+        workoutMenuArray.append(WorkoutMenu(target: "腹筋", menu: ["シットアップ", "ツイストシットアップ", "レッグレイズ"]))
+        workoutMenuArray.append(WorkoutMenu(target: "その他", menu: []))
     }
     
     //MARK: - Bindings
@@ -130,6 +134,7 @@ final class RegisterMenuViewController: UIViewController {
         footerView.workoutView.button?.rx.tap.asDriver().drive { [ weak self ] _ in
             let workoutVC = WorkoutViewController()
             workoutVC.modalPresentationStyle = .fullScreen
+            workoutVC.modalTransitionStyle = .crossDissolve
             self?.present(workoutVC, animated: true)
         }
         .disposed(by: disposeBag)
@@ -137,6 +142,7 @@ final class RegisterMenuViewController: UIViewController {
         footerView.homeView.button?.rx.tap.asDriver().drive { [ weak self ] _ in
             let homeVC = HomeViewController()
             homeVC.modalPresentationStyle = .fullScreen
+            homeVC.modalTransitionStyle = .crossDissolve
             self?.present(homeVC, animated: true)
         }
         .disposed(by: disposeBag)
@@ -163,9 +169,8 @@ extension RegisterMenuViewController: UITableViewDelegate, UITableViewDataSource
             return 0
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         
         let cell = tableView.dequeueReusableCell(withIdentifier: RegsterMenuCell.identifier, for: indexPath) as! RegsterMenuCell
         cell.menuLabel.text = workoutMenuArray[indexPath.section].menu[indexPath.row]
@@ -173,18 +178,21 @@ extension RegisterMenuViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    // sectionHeader - ターゲット部位と種目登録
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView = RegisterMenuTableViewVHeader(frame: .zero, section: section)
         headerView.targetLabel.text = workoutMenuArray[section].target
         headerView.openSectionButton.setImage(
             workoutMenuArray[section].isOpened
             ? UIImage(systemName: "chevron.up")
             : UIImage(systemName: "chevron.down"), for: .normal)
+        
         headerView.delegate = self
         
         headerView.addMenuButton.rx.tap.asDriver().drive(onNext: { [weak self] in
             guard let self = self else { return }
-            let alert: UIAlertController = UIAlertController(title: "\(self.workoutMenuArray[section].target )", message: "トレーニング種目を登録", preferredStyle: UIAlertController.Style.alert)
+            let alert: UIAlertController = UIAlertController(title: "\(self.workoutMenuArray[section].target )", message: "トレーニング種目を追加", preferredStyle: UIAlertController.Style.alert)
             alert.addTextField(configurationHandler: nil)
             alert.textFields?.first?.placeholder = "トレーニング種目名"
             alert.textFields?.first?.keyboardType = .namePhonePad
@@ -234,10 +242,11 @@ extension RegisterMenuViewController: UITableViewDelegate, UITableViewDataSource
         
         let deleteAction = UIContextualAction(style: .destructive, title: "削除") {action, view, completionHandler in
             
-            let alert = UIAlertController(title: "確認", message: "選択中のデータを削除しますか?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "確認", message: "選択中の種目を削除しますか?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { _ in
                 self.workoutMenuArray[indexPath.section].menu.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                UserDefaults.standard.setWorkoutMenu(self.workoutMenuArray, "WorkoutMenu")
             }))
             alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -279,5 +288,11 @@ extension RegisterMenuViewController: TableHeaderViewDelegate {
     }
 }
     
+extension RegisterMenuViewController: UITextFieldDelegate {
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
+
 

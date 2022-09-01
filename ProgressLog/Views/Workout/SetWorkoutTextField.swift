@@ -11,11 +11,11 @@ import UIKit
 class SetWorkoutTextField: UITextField {
     
     let label = UILabel()
-    
-    var leftBorder = CALayer()
-    var rightBorder = CALayer()
-    var topBorder = CALayer()
-    var bottomBorder = CALayer()
+//
+//    var leftBorder = CALayer()
+//    var rightBorder = CALayer()
+//    var topBorder = CALayer()
+//    var bottomBorder = CALayer()
 
     
     init(frame: CGRect, placeholder: String, tag: Int, labelWidth: CGFloat, borderWidth: CGFloat = 1, borderColor: UIColor = UIColor.baseColor!, cornerRadius: CGFloat = 5) {
@@ -34,11 +34,6 @@ class SetWorkoutTextField: UITextField {
         self.placeholder = " " + placeholder
         self.borderStyle = .roundedRect
         self.font = UIFont.systemFont(ofSize: 14)
-        
-
-        
-
-
 
         // label
         label.text = placeholder
@@ -54,14 +49,6 @@ class SetWorkoutTextField: UITextField {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-
-
-
-
-
-
-
-    }
+}
 
 

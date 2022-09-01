@@ -17,7 +17,7 @@ class RegisterMenuTableViewVHeader: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.layer.backgroundColor = UIColor.outColor?.cgColor
-        label.layer.cornerRadius = 10
+        label.layer.cornerRadius = 8
         label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         return label
@@ -26,7 +26,7 @@ class RegisterMenuTableViewVHeader: UIView {
     let openSectionButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.backgroundColor = UIColor.white.cgColor
-        button.layer.cornerRadius = 10
+//        button.layer.cornerRadius = 10
         button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         button.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         button.tintColor = .outColor
@@ -59,7 +59,7 @@ class RegisterMenuTableViewVHeader: UIView {
     }
     
     private func setupLayout() {
-        layer.cornerRadius = 10
+        layer.cornerRadius = 8
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         backgroundColor = .white
         

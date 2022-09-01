@@ -12,8 +12,8 @@ class GradientView: UIView, CAAnimationDelegate {
     let gradientLayer = CAGradientLayer()
         
     let colors = [
-        UIColor.accentColor?.withAlphaComponent(0.4),
-        UIColor.accentColor
+        UIColor.endColor,
+        UIColor.secondColor
     ].map { $0!.cgColor}
     
     override init(frame: CGRect) {
