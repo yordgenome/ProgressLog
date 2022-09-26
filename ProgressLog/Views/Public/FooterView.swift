@@ -11,10 +11,10 @@ class FooterView: UIView {
     let gradientView = SecondGradientView()
     
         let homeView = FooterButtonView(frame: .zero, width: 50, imageName: "house.fill", text: "ホーム", labelWidth: 30)
-        let chartView = FooterButtonView(frame: .zero, width: 50, imageName: "chart.bar.xaxis", text: "グラフ", labelWidth: 30)
-        let workoutView = FooterButtonView(frame: .zero, width: 50, imageName: "rectangle.and.pencil.and.ellipsis", text: "記録", labelWidth: 30)
-        let menuView = FooterButtonView(frame: .zero, width: 50, imageName: "heart.fill", text: "種目", labelWidth: 30)
-        let selfView = FooterButtonView(frame: .zero, width: 50, imageName: "cube.fill", text: "設定", labelWidth: 30)
+//        let chartView = FooterButtonView(frame: .zero, width: 50, imageName: "chart.bar.xaxis", text: "グラフ", labelWidth: 30)
+        let workoutView = FooterButtonView(frame: .zero, width: 50, imageName: "book.fill", text: "記録", labelWidth: 30)
+        let menuView = FooterButtonView(frame: .zero, width: 50, imageName: "tablecells.fill", text: "種目", labelWidth: 30)
+        let settingsView = FooterButtonView(frame: .zero, width: 50, imageName: "text.justify", text: "設定", labelWidth: 30)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ class FooterView: UIView {
         gradientView.frame = UIScreen.main.bounds
         addSubview(gradientView)
 
-        let baseStackView = UIStackView(arrangedSubviews: [homeView, chartView, workoutView, menuView, selfView])
+        let baseStackView = UIStackView(arrangedSubviews: [homeView, workoutView, menuView, settingsView])
         baseStackView.axis = .horizontal
         baseStackView.distribution = .fillEqually
         baseStackView.spacing = 10

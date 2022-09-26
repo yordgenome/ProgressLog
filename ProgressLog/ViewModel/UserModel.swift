@@ -172,7 +172,11 @@ class UserModel {
         let email = document.data()!["email"] as! String
         let createdAt = document.data()!["createdAt"] as! Timestamp
         
-        return User(id: uid, name: name, email: email, createdAt: createdAt)
+         let user = User(id: uid, name: name, email: email, createdAt: createdAt)
+        
+        print(user)
+
+        return user
         
     }
     
@@ -188,7 +192,9 @@ class UserModel {
                 setData.updateValue(dicArray[i], forKey: String(i))
             }
         }
-        try await db.collection("users").document(uid).collection("workout").document(dateString).setData(setData, merge: true)
+        try await db.collection("users").document(uid).collection("workout").document(dateString).setData(setData)
+//        try await db.collection("users").document(uid).collection("workout").document(dateString).setData(setData, merge: true)
+
     }
     
     static func getWorkoutFromFirestore(uid: String, dateString: String) async throws -> [WorkoutModel] {

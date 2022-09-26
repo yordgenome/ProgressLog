@@ -69,8 +69,8 @@ final class RegisterMenuViewController: UIViewController {
         view.addSubview(footerView)
         view.addSubview(workoutMenuTableView)
         
-        gradientView.frame = view.bounds
-        headerView.anchor(top: view.topAnchor, centerX: view.centerXAnchor, width: view.frame.width, height: 80)
+//        gradientView.frame = view.bounds
+        headerView.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, centerX: view.centerXAnchor, width: view.frame.width, bottomPadding: -36)
         setTargetView.anchor(top: headerView.bottomAnchor, centerX: view.centerXAnchor, width: view.frame.width, height: 54)
         workoutMenuTableView.anchor(top: setTargetView.bottomAnchor, bottom: footerView.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
         footerView.anchor(bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 80)
@@ -145,6 +145,13 @@ final class RegisterMenuViewController: UIViewController {
             homeVC.modalTransitionStyle = .crossDissolve
             self?.present(homeVC, animated: true)
         }
+        .disposed(by: disposeBag)
+        
+        footerView.settingsView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
+            let settingsVC = SettingsViewController()
+            settingsVC.modalPresentationStyle = .fullScreen
+            settingsVC.modalTransitionStyle = .crossDissolve
+            self?.present(settingsVC, animated: true)})
         .disposed(by: disposeBag)
     }
 }

@@ -14,9 +14,8 @@ import RxCocoa
 
 final class WorkoutViewController: UIViewController {
     
-//MARK: - Properties
+    //MARK: - Properties
     private let viewModel = SetworkoutViewModel()
-    private let gradientView = GradientView()
     private let footerView = FooterView()
     private let headerView = DatePickView()
     private let setWorkoutView = SetWorkoutView()
@@ -28,9 +27,9 @@ final class WorkoutViewController: UIViewController {
     var selectedTarget = 0
     
     var currentDate: Date?
-      
+    
     private let todaysVolumeLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textAlignment = .center
         label.textColor = .outColor
         label.backgroundColor = .white
@@ -46,11 +45,11 @@ final class WorkoutViewController: UIViewController {
         return tableView
     }()
     
-//MARK: - LifeCycles
+    //MARK: - LifeCycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .accentColor
         
         workoutMenuArray = UserDefaults.standard.getWorkoutMenu("WorkoutMenu") ?? []
         if workoutMenuArray.isEmpty {
@@ -60,12 +59,12 @@ final class WorkoutViewController: UIViewController {
         todaysVolumeLabel.text = workoutData.map {$0.volume}.reduce(0) {
             (num1: Double, num2: Double) -> Double in num1 + num2
         }.description
-  
+        
         currentDate = DateUtils.toDateFromString(string: headerView.dateTextField.text!)
         workoutTableView.delegate = self
         workoutTableView.dataSource = self
         todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
-
+        
         setupLayout()
         setupBindings()
     }
@@ -79,10 +78,12 @@ final class WorkoutViewController: UIViewController {
             print(#function)
             if let snapshot = snapshot {
                 guard let mapData = snapshot.data() else {
+                    print("データないよ1")
                     self.workoutTableView.reloadData()
                     self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
                     return }
                 if mapData.count == 0 {
+                    print("データないよ2")
                     return
                 } else {
                     print("mapData:", mapData)
@@ -103,10 +104,11 @@ final class WorkoutViewController: UIViewController {
                         }
                     }
                     self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
+                    self.workoutTableView.reloadData()
                     print("ワークアウトの取得に成功")
                 }
-                self.workoutTableView.reloadData()
-                self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
+//                self.workoutTableView.reloadData()
+//                self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
             }
             
             if let error = error {
@@ -128,34 +130,29 @@ final class WorkoutViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(gradientView)
         view.addSubview(headerView)
         view.addSubview(todaysVolumeLabel)
         view.addSubview(setWorkoutView)
         view.addSubview(workoutTableView)
         view.addSubview(footerView)
         
-        gradientView.frame = view.bounds
-        headerView.anchor(top: view.topAnchor, centerX: view.centerXAnchor, width: view.frame.width, height: 80)
+        headerView.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, centerX: view.centerXAnchor, width: view.frame.width, bottomPadding: -36)
         todaysVolumeLabel.anchor(top: headerView.bottomAnchor, centerX: view.centerXAnchor, width: view.frame.width, height: 18)
         setWorkoutView.anchor(top: todaysVolumeLabel.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 100)
         workoutTableView.anchor(top: setWorkoutView.bottomAnchor, bottom: footerView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.bounds.width, topPadding: 5, bottomPadding: 5)
         footerView.anchor(bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 80)
     }
-
+    
     private func totalVolume() -> Double {
         let data = workoutData.map({ (workout) -> Double in
             return workout.volume
         })
-        print("workoutData:", workoutData)
-        print("data:", data)
-        print("data.reduce(0, +):", data.reduce(0, +))
         return data.reduce(0, +)
     }
     
-//MARK: - Bindings
+    //MARK: - Bindings
     private func setupBindings() {
-
+        
         SetupTextFields()
         // 日付処理
         headerView.dateTextField.rx.text.asDriver().drive { [weak self] text in
@@ -171,13 +168,13 @@ final class WorkoutViewController: UIViewController {
             self.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: self.currentDate!)!
             self.headerView.dateTextField.text = DateUtils.toStringFromDate(date: self.currentDate!)
             self.getWorkoutData(dateString: self.headerView.dateTextField.text!)
-
+            
             self.todaysVolumeLabel.text = self.workoutData.map {$0.volume}.reduce(0) {
                 (num1: Double, num2: Double) -> Double in num1 + num2
             }.description
             
         }.disposed(by: disposeBag)
-
+        
         // 翌日
         headerView.nextDayButton.rx.tap.asDriver().drive { [weak self] _ in
             guard let self = self else { return }
@@ -209,10 +206,37 @@ final class WorkoutViewController: UIViewController {
             self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
             print(self.workoutData)
             Task { do { try await UserModel.setWorkoutToFirestore(workout: self.workoutData, dateString: DateUtils.toStringFromDate(date: self.currentDate!))
-            } catch { print("ワークアウトの登録に失敗") }
+            } catch { print("ワークアウトの登録に失敗!") }
+                
+            }
+            if UserDefaults.standard.getBaseVolume() == nil {
+                print("nilだよ")
+                UserDefaults.standard.setBaseVolume(dateString: DateUtils.toStringFromDate(date: self.currentDate!), volume: self.totalVolume())
+                UserDefaults.standard.setMaxVolume(dateString: DateUtils.toStringFromDate(date: self.currentDate!), volume: self.totalVolume())
+            } else if UserDefaults.standard.getBaseVolume() != nil {
+                print("nilじゃないよ")
+                let data = UserDefaults.standard.getBaseVolume()
+                let dateString = data!["dateString"]
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy年MM月dd日HH"
+                let baseDate = dateFormatter.date(from: dateString as! String)
+                //                    UserDefaults.standard.setBaseVolume(dateString: DateUtils.toStringFromDate(date: self.currentDate!), volume: self.totalVolume())
+                if baseDate?.compare(self.currentDate!) == .orderedSame {
+                    print("orderedSameだよ")
+                    UserDefaults.standard.setBaseVolume(dateString: DateUtils.toStringFromDate(date: self.currentDate!), volume: self.totalVolume())
+                }
+            }
+            
+            if let maxData = UserDefaults.standard.getMaxVolume() {
+                let volume = self.totalVolume()
+                let maxVolume = maxData["volume"] as! Double
+                if maxVolume < volume {
+                    print("maxxx")
+                    UserDefaults.standard.setMaxVolume(dateString: DateUtils.toStringFromDate(date: self.currentDate!), volume: volume)
+                }
             }
         }.disposed(by: disposeBag)
-
+        
         setWorkoutView.clearButton.rx.tap.asDriver().drive {[ weak self ] _ in
             guard let self = self else { return }
             self.setWorkoutView.targetPartTextField.text = ""
@@ -220,7 +244,7 @@ final class WorkoutViewController: UIViewController {
             self.setWorkoutView.repsTextField.text = ""
             self.setWorkoutView.weightTextField.text = ""
         }.disposed(by: disposeBag)
-
+        
         setWorkoutView.targetPartTextField.rx.text
             .asDriver()
             .drive { [weak self] text in
@@ -267,17 +291,23 @@ final class WorkoutViewController: UIViewController {
             let homeVC = HomeViewController()
             homeVC.modalPresentationStyle = .fullScreen
             homeVC.modalTransitionStyle = .crossDissolve
-            self?.present(homeVC, animated: true)
-        }
+            self?.present(homeVC, animated: true)}
         .disposed(by: disposeBag)
         
         footerView.menuView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
             let regiWorkoutVC = RegisterMenuViewController()
             regiWorkoutVC.modalPresentationStyle = .fullScreen
             regiWorkoutVC.modalTransitionStyle = .crossDissolve
-            self?.present(regiWorkoutVC, animated: true)
-        }).disposed(by: disposeBag)
-                                                 
+            self?.present(regiWorkoutVC, animated: true)})
+        .disposed(by: disposeBag)
+        
+        footerView.settingsView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
+            let settingsVC = SettingsViewController()
+            settingsVC.modalPresentationStyle = .fullScreen
+            settingsVC.modalTransitionStyle = .crossDissolve
+            self?.present(settingsVC, animated: true)})
+        .disposed(by: disposeBag)
+        
     }
     
     private func SetupTextFields() {
@@ -307,7 +337,7 @@ final class WorkoutViewController: UIViewController {
         let doneButtonItem2 = UIBarButtonItem(title: "次へ", style: .done, target: self, action: #selector(donePicker2))
         workoutNameToolbar.setItems([space2, doneButtonItem2], animated: true)
         setWorkoutView.workoutNameTextField.inputAccessoryView = workoutNameToolbar
-
+        
         // weightTextField
         let weightToolbar = UIToolbar()
         weightToolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
@@ -383,24 +413,24 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         cell.weightLabel.text = workoutData[indexPath.section].weight.description + "KG"
         cell.repsLabel.text = workoutData[indexPath.section].reps.description + "回"
         cell.TotalVolumeLabel.text = workoutData[indexPath.section].volume.description + "KG"
-
+        
         
         cell.selectionStyle = .none
         
         return cell
     }
-        
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 8
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let marginView = UIView()
         marginView.backgroundColor = .clear
         return marginView
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
     }
@@ -418,10 +448,17 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             let alert = UIAlertController(title: "確認", message: "選択中のデータを削除しますか?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { _ in
                 self.workoutData.remove(at: indexPath.section)
+
+                Task{ do { try await UserModel.setWorkoutToFirestore(workout: self.workoutData, dateString: DateUtils.toStringFromDate(date: self.currentDate!))
+                    print("データ更新")
+                } catch {
+                    print("データ更新エラー")
+                }}
+                self.todaysVolumeLabel.text = "トレーニングボリューム：\(self.totalVolume())KG"
+
                 let indexSet = NSMutableIndexSet()
                 indexSet.add(indexPath.section)
                 tableView.deleteSections(indexSet as IndexSet, with: .fade)
-                
             }))
             alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)

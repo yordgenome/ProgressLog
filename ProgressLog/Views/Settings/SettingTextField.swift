@@ -1,17 +1,17 @@
 //
-//  SignUpButtom.swift
-//  WorkoutVolumeDiary
+//  SettingTextField.swift
+//  ProgressLog
 //
-//  Created by Yo Tahara on 2022/06/19.
+//  Created by 田原葉 on 2022/09/12.
 //
 
 import UIKit
 
-class SignUptTextField: UITextField {
+class SettingTextField: UITextField {
     
-    init(placeholder: String, tag: Int = 0, returnKeyType: UIReturnKeyType){
+    init(text: String, tag: Int = 0, returnKeyType: UIReturnKeyType){
         super.init(frame: .zero)
-        self.placeholder = placeholder
+        self.text = text
         self.borderStyle = .roundedRect
         self.backgroundColor = .white
         self.tag = tag
@@ -26,7 +26,6 @@ class SignUptTextField: UITextField {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 6
-//        self.font = UIFont.systemFont(ofSize: 14)
     }
     
     required init?(coder: NSCoder) {

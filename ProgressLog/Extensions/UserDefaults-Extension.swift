@@ -22,4 +22,24 @@ extension UserDefaults {
         let data = WorkoutMenu.map { try! JSONEncoder().encode($0) }
         self.set(data as [Any], forKey: key)
     }
+    
+    func setBaseVolume(dateString: String, volume: Double,_ key: String = "BaseVolume") {
+        let data = ["dateString": dateString, "volume": volume] as [String : Any]
+        self.set(data, forKey: key)
+    }
+    
+    func getBaseVolume(_ key: String = "BaseVolume") -> [String: Any]? {
+        let data = self.dictionary(forKey: key)
+        return data
+    }
+    
+    func setMaxVolume(dateString: String, volume: Double,_ key: String = "MaxVolume") {
+        let data = ["dateString": dateString, "volume": volume] as [String : Any]
+        self.set(data, forKey: key)
+    }
+    
+    func getMaxVolume(_ key: String = "MaxVolume") -> [String: Any]? {
+        let data = self.dictionary(forKey: key)
+        return data
+    }
 }

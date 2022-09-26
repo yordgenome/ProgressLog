@@ -18,10 +18,10 @@ class SignUpLabel: UILabel {
         self.backgroundColor = .clear
     }
     
-    init(text: String){
+    init(text: String, fontColor: UIColor = .white){
         super.init(frame: .zero)
         self.text = text
-        self.textColor = .white
+        self.textColor = fontColor
         self.textAlignment = .left
         self.font = UIFont(name: "GeezaPro", size: 12)
         self.backgroundColor = .clear

@@ -24,7 +24,7 @@
 		A1023CA328858532000AB818 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA228858532000AB818 /* User.swift */; };
 		A1023CA8288585C9000AB818 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA7288585C9000AB818 /* GradientView.swift */; };
 		A1023CAE288586DB000AB818 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CAD288586DB000AB818 /* SignUpViewController.swift */; };
-		A1023CB12885871A000AB818 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB028858719000AB818 /* RegisterViewModel.swift */; };
+		A1023CB12885871A000AB818 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB028858719000AB818 /* SignUpViewModel.swift */; };
 		A1023CB328858785000AB818 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB228858785000AB818 /* LoginViewController.swift */; };
 		A1023CB5288587B9000AB818 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB4288587B9000AB818 /* LoginViewModel.swift */; };
 		A1023CBA28858822000AB818 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB928858822000AB818 /* SignUpTextField.swift */; };
@@ -50,6 +50,12 @@
 		A1023CE3288700EE000AB818 /* SecondGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CE2288700EE000AB818 /* SecondGradientView.swift */; };
 		A1023CE72889A5B0000AB818 /* WorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CE62889A5AF000AB818 /* WorkoutCell.swift */; };
 		A1023CE92889A89B000AB818 /* CellBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CE82889A89B000AB818 /* CellBackgroundView.swift */; };
+		A13B4D6E28C0FBD800D13441 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D6D28C0FBD800D13441 /* SettingsViewController.swift */; };
+		A13B4D7128C10A1D00D13441 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7028C10A1D00D13441 /* SettingsHeaderView.swift */; };
+		A13B4D7328C788E000D13441 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7228C788E000D13441 /* HomeHeader.swift */; };
+		A13B4D7528CF5B9100D13441 /* SettingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7428CF5B9100D13441 /* SettingLabel.swift */; };
+		A13B4D7728CF80B600D13441 /* SettingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7628CF80B600D13441 /* SettingTextField.swift */; };
+		A13B4D7928D7AC3700D13441 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7828D7AC3700D13441 /* ResultView.swift */; };
 		A1936D82289024C100315381 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1936D81289024C100315381 /* FooterView.swift */; };
 		C33392F1D5FF3C75A960AB9A /* Pods_ProgressLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE5C8503AE71D1BB1D1BF62 /* Pods_ProgressLog.framework */; };
 /* End PBXBuildFile section */
@@ -101,7 +107,7 @@
 		A1023CA228858532000AB818 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1023CA7288585C9000AB818 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		A1023CAD288586DB000AB818 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A1023CB028858719000AB818 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		A1023CB028858719000AB818 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		A1023CB228858785000AB818 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A1023CB4288587B9000AB818 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A1023CB928858822000AB818 /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
@@ -124,6 +130,12 @@
 		A1023CE2288700EE000AB818 /* SecondGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGradientView.swift; sourceTree = "<group>"; };
 		A1023CE62889A5AF000AB818 /* WorkoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCell.swift; sourceTree = "<group>"; };
 		A1023CE82889A89B000AB818 /* CellBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackgroundView.swift; sourceTree = "<group>"; };
+		A13B4D6D28C0FBD800D13441 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A13B4D7028C10A1D00D13441 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
+		A13B4D7228C788E000D13441 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
+		A13B4D7428CF5B9100D13441 /* SettingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingLabel.swift; sourceTree = "<group>"; };
+		A13B4D7628CF80B600D13441 /* SettingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTextField.swift; sourceTree = "<group>"; };
+		A13B4D7828D7AC3700D13441 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		A1936D81289024C100315381 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		AD5C39408399D51873A4F729 /* Pods-ProgressLog-ProgressLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressLog-ProgressLogUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAE5C8503AE71D1BB1D1BF62 /* Pods_ProgressLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProgressLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +258,7 @@
 				A1023C6328847700000AB818 /* HomeViewController.swift */,
 				A1023CBF28858900000AB818 /* WorkoutViewController.swift */,
 				A1023CC9288589F7000AB818 /* RegisterMenuViewController.swift */,
+				A13B4D6D28C0FBD800D13441 /* SettingsViewController.swift */,
 				A1023CAD288586DB000AB818 /* SignUpViewController.swift */,
 				A1023CB228858785000AB818 /* LoginViewController.swift */,
 			);
@@ -276,6 +289,7 @@
 		A1023CA42885857A000AB818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A13B4D6F28C109FA00D13441 /* Settings */,
 				A1023CA6288585B3000AB818 /* Public */,
 				A1023CA5288585A4000AB818 /* Home */,
 				A1023CC128858920000AB818 /* Workout */,
@@ -288,6 +302,8 @@
 		A1023CA5288585A4000AB818 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A13B4D7228C788E000D13441 /* HomeHeader.swift */,
+				A13B4D7828D7AC3700D13441 /* ResultView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -306,7 +322,7 @@
 		A1023CAF28858700000AB818 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A1023CB028858719000AB818 /* RegisterViewModel.swift */,
+				A1023CB028858719000AB818 /* SignUpViewModel.swift */,
 				A1023CB4288587B9000AB818 /* LoginViewModel.swift */,
 				A1023CD328858C44000AB818 /* SetWorkoutViewModel.swift */,
 				A1023CD528858C56000AB818 /* SetTargetViewModel.swift */,
@@ -346,6 +362,16 @@
 				A1023CD128858C00000AB818 /* SetTargetView.swift */,
 			);
 			path = RegisterMenu;
+			sourceTree = "<group>";
+		};
+		A13B4D6F28C109FA00D13441 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A13B4D7028C10A1D00D13441 /* SettingsHeaderView.swift */,
+				A13B4D7428CF5B9100D13441 /* SettingLabel.swift */,
+				A13B4D7628CF80B600D13441 /* SettingTextField.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -588,6 +614,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A13B4D7728CF80B600D13441 /* SettingTextField.swift in Sources */,
 				A1023C9328858085000AB818 /* UIView-Extension.swift in Sources */,
 				A1023CE72889A5B0000AB818 /* WorkoutCell.swift in Sources */,
 				A1023C95288580B0000AB818 /* UIColor-Extension.swift in Sources */,
@@ -598,7 +625,7 @@
 				A1936D82289024C100315381 /* FooterView.swift in Sources */,
 				A1023C99288582E1000AB818 /* DateUtils.swift in Sources */,
 				A1023CC32885893E000AB818 /* DatePickView.swift in Sources */,
-				A1023CB12885871A000AB818 /* RegisterViewModel.swift in Sources */,
+				A1023CB12885871A000AB818 /* SignUpViewModel.swift in Sources */,
 				A1023CCC28858A9F000AB818 /* RegisterMenuTableViewVHeader.swift in Sources */,
 				A1023CCA288589F7000AB818 /* RegisterMenuViewController.swift in Sources */,
 				A1023CD028858B95000AB818 /* RegisterMenuHeaderView.swift in Sources */,
@@ -608,21 +635,26 @@
 				A1023CD428858C44000AB818 /* SetWorkoutViewModel.swift in Sources */,
 				A1023CC52885896E000AB818 /* SetWorkoutView.swift in Sources */,
 				A1023CD228858C00000AB818 /* SetTargetView.swift in Sources */,
+				A13B4D7528CF5B9100D13441 /* SettingLabel.swift in Sources */,
 				A1023CBC28858836000AB818 /* SignUpLabel.swift in Sources */,
 				A1023CAE288586DB000AB818 /* SignUpViewController.swift in Sources */,
 				A1023CE3288700EE000AB818 /* SecondGradientView.swift in Sources */,
+				A13B4D7328C788E000D13441 /* HomeHeader.swift in Sources */,
 				A1023CBA28858822000AB818 /* SignUpTextField.swift in Sources */,
 				A1023C6428847700000AB818 /* HomeViewController.swift in Sources */,
 				A1023CE92889A89B000AB818 /* CellBackgroundView.swift in Sources */,
+				A13B4D7128C10A1D00D13441 /* SettingsHeaderView.swift in Sources */,
 				A1023CA1288584DF000AB818 /* WorkoutModel.swift in Sources */,
 				A1023CC028858901000AB818 /* WorkoutViewController.swift in Sources */,
 				A1023CC72885898E000AB818 /* WorkoutTableViewCell.swift in Sources */,
 				A1023CB5288587B9000AB818 /* LoginViewModel.swift in Sources */,
 				A1023CB328858785000AB818 /* LoginViewController.swift in Sources */,
 				A1023CE12885ADA9000AB818 /* SetWorkoutTextField.swift in Sources */,
+				A13B4D7928D7AC3700D13441 /* ResultView.swift in Sources */,
 				A1023C6028847700000AB818 /* AppDelegate.swift in Sources */,
 				A1023C6228847700000AB818 /* SceneDelegate.swift in Sources */,
 				A1023CBE28858850000AB818 /* SignUpButton.swift in Sources */,
+				A13B4D6E28C0FBD800D13441 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,10 +832,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W24G5Z7D4D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProgressLog/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -815,7 +849,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -827,10 +861,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W24G5Z7D4D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProgressLog/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -842,7 +878,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

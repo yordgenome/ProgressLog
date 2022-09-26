@@ -16,9 +16,9 @@ final class SignUpViewController: UIViewController {
     private var workoutArray: [WorkoutModel] = []
     
     let disposeBag = DisposeBag()
-    private let viewModel = RegisterViewModel()
+    private let viewModel = SignUpViewModel()
     
-    private let gradientView = GradientView()
+    private let gradientView = CellBackgroundView()
     
     private let productLabel = SignUpLabel(text: "Progress Log", font: UIFont(name: "DevanagariSangamMN-Bold", size: 50)!)
     private let titleLabel = SignUpLabel(text: "アカウント登録", font: UIFont(name: "DevanagariSangamMN-Bold", size: 24)!)
@@ -26,23 +26,35 @@ final class SignUpViewController: UIViewController {
     private let nameLabel = SignUpLabel(text: "名前")
     private let passwordLabel = SignUpLabel(text: "パスワード")
     private let emailLabel = SignUpLabel(text: "メールアドレス")
+    private let password2Label = SignUpLabel(text: "確認用パスワード")
+    private let email2Label = SignUpLabel(text: "確認用メールアドレス")
     
     private let nameTextField = SignUptTextField(placeholder: "名前", tag: 0, returnKeyType: .next)
     private let emailTextField = SignUptTextField(placeholder: "メールアドレス", tag: 1, returnKeyType: .next)
-    private let passwordTextField = SignUptTextField(placeholder: "パスワード", tag: 2, returnKeyType: .done)
+    private let email2TextField = SignUptTextField(placeholder: "確認用メールアドレス", tag: 2, returnKeyType: .next)
+    private let passwordTextField = SignUptTextField(placeholder: "パスワード", tag: 3, returnKeyType: .next)
+    private let password2TextField = SignUptTextField(placeholder: "確認用パスワード", tag: 4, returnKeyType: .done)
     
     private let registerButton = SignUpButton(text: "登録")
     
     private let moveToLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("アカウントをお持ちの方はコチラ", for: .normal)
-        button.backgroundColor = .clear
+        let button = UIButton(type: .custom)
+        button.setTitle(" アカウントをお持ちの方はコチラ ", for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.backgroundColor = UIColor.secondColor?.withAlphaComponent(0.9).cgColor
+        button.layer.cornerRadius = 5
+        button.layer.shadowOffset = .init(width: 1.5, height: 2)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 6
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
         nameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -55,18 +67,24 @@ final class SignUpViewController: UIViewController {
         addSubViews()
         passwordTextField.isSecureTextEntry = true
         if #available(iOS 12.0, *) { passwordTextField.textContentType = .oneTimeCode }
+        password2TextField.isSecureTextEntry = true
+        if #available(iOS 12.0, *) { passwordTextField.textContentType = .oneTimeCode }
         
         gradientView.frame = view.bounds
-        productLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 50, topPadding: 30)
-        titleLabel.anchor(top: productLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 30)
-        nameLabel.anchor(top: titleLabel.bottomAnchor, left: nameTextField.leftAnchor, width: 150, height: 20, topPadding: 30)
+        productLabel.anchor(top: view.topAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 50, topPadding: 50)
+        titleLabel.anchor(top: productLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 20)
+        nameLabel.anchor(top: titleLabel.bottomAnchor, left: nameTextField.leftAnchor, width: 150, height: 20, topPadding: 16)
         nameTextField.anchor(top: nameLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
         emailLabel.anchor(top: nameTextField.bottomAnchor, left: nameLabel.leftAnchor, width: 150, height: 20, topPadding: 16)
         emailTextField.anchor(top: emailLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
-        passwordLabel.anchor(top: emailTextField.bottomAnchor, left: nameLabel.leftAnchor, width: 150, height: 20, topPadding: 16)
+        email2Label.anchor(top: emailTextField.bottomAnchor, left: nameLabel.leftAnchor, width: 150, height: 20, topPadding: 16)
+        email2TextField.anchor(top: email2Label.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
+        passwordLabel.anchor(top: email2TextField.bottomAnchor, left: nameLabel.leftAnchor, width: 150, height: 20, topPadding: 16)
         passwordTextField.anchor(top: passwordLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
-        registerButton.anchor(top: passwordTextField.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 38)
-        moveToLoginButton.anchor(top: registerButton.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 50)
+        password2Label.anchor(top: passwordTextField.bottomAnchor, left: nameLabel.leftAnchor, width: 150, height: 20, topPadding: 16)
+        password2TextField.anchor(top: password2Label.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
+        registerButton.anchor(top: password2TextField.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 38)
+        moveToLoginButton.anchor(top: registerButton.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 38)
     }
     
     private func addSubViews(){
@@ -79,6 +97,10 @@ final class SignUpViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
+        view.addSubview(email2Label)
+        view.addSubview(email2TextField)
+        view.addSubview(password2Label)
+        view.addSubview(password2TextField)
         view.addSubview(registerButton)
         view.addSubview(moveToLoginButton)
     }
@@ -99,10 +121,26 @@ final class SignUpViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        email2TextField.rx.text
+            .asDriver()
+            .drive { [weak self] text in
+                
+                self?.viewModel.email2TextInput.onNext(text == self!.emailTextField.text)
+            }
+            .disposed(by: disposeBag)
+        
         passwordTextField.rx.text
             .asDriver()
             .drive { [weak self] text in
                 self?.viewModel.passwordTextInput.onNext(text ?? "")
+            }
+            .disposed(by: disposeBag)
+        
+        password2TextField.rx.text
+            .asDriver()
+            .drive { [weak self] text in
+                
+                self?.viewModel.password2TextInput.onNext(text == self!.passwordTextField.text)
             }
             .disposed(by: disposeBag)
         
@@ -161,10 +199,13 @@ extension SignUpViewController: UITextFieldDelegate {
         case 0:
             emailTextField.becomeFirstResponder()
         case 1:
-            passwordTextField.becomeFirstResponder()
+            email2TextField.becomeFirstResponder()
         case 2:
-            passwordTextField.resignFirstResponder()
-            
+            passwordTextField.becomeFirstResponder()
+        case 3:
+            password2TextField.becomeFirstResponder()
+        case 4:
+            password2TextField.resignFirstResponder()
         default:
             break
         }

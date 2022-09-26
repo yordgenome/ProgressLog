@@ -16,7 +16,7 @@ final class LoginViewController: UIViewController {
     let disposeBag = DisposeBag()
     private let viewModel = LoginViewModel()
     
-    private let gradientView = GradientView()
+    private let gradientView = CellBackgroundView()
     
     private let productLabel = SignUpLabel(text: "ログイン", font: UIFont(name: "DevanagariSangamMN-Bold", size: 36)!)
 
@@ -27,29 +27,40 @@ final class LoginViewController: UIViewController {
     private let passwordTextField = SignUptTextField(placeholder: "パスワード", tag: 1, returnKeyType: .done)
 
     private let loginButton = SignUpButton(text: "ログイン")
+    
+    private let passwordUpdateButton = SignUpButton()
+
 
     private let moveToSignUpButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("アカウントをお持ちでない方はコチラ", for: .normal)
-        button.backgroundColor = .clear
+        let button = UIButton(type: .custom)
+        button.setTitle(" アカウントをお持ちでない方はコチラ ", for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.backgroundColor = UIColor.secondColor?.withAlphaComponent(0.9).cgColor
+        button.layer.cornerRadius = 5
+        button.layer.shadowOffset = .init(width: 1.5, height: 2)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 6
         return button
     }()
     
-    private let setButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Set", for: .normal)
-        button.backgroundColor = .red
-        return button
-    }()
-    private let getButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Get", for: .normal)
-        button.backgroundColor = .red
-        return button
-    }()
+//    private let setButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Set", for: .normal)
+//        button.backgroundColor = .red
+//        return button
+//    }()
+//    private let getButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Get", for: .normal)
+//        button.backgroundColor = .red
+//        return button
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -62,18 +73,16 @@ final class LoginViewController: UIViewController {
         addSubViews()
         passwordTextField.isSecureTextEntry = true
         if #available(iOS 12.0, *) { passwordTextField.textContentType = .oneTimeCode }
-        
-        view.addSubview(setButton)
-        view.addSubview(getButton)
 
         gradientView.frame = view.bounds
-        productLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 50, topPadding: 30)
-        emailLabel.anchor(top: productLabel.bottomAnchor, left: emailTextField.leftAnchor, width: 150, height: 20, topPadding: 30)
+        productLabel.anchor(top: view.topAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 50, topPadding: 50)
+        emailLabel.anchor(top: productLabel.bottomAnchor, left: emailTextField.leftAnchor, width: 150, height: 20, topPadding: 16)
         emailTextField.anchor(top: emailLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
         passwordLabel.anchor(top: emailTextField.bottomAnchor, left: emailLabel.leftAnchor, width: 150, height: 20, topPadding: 16)
         passwordTextField.anchor(top: passwordLabel.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 2)
         loginButton.anchor(top: passwordTextField.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 38)
-        moveToSignUpButton.anchor(top: loginButton.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 50)
+        passwordUpdateButton.anchor(top: loginButton.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 38)
+        moveToSignUpButton.anchor(top: passwordUpdateButton.bottomAnchor, centerX: view.centerXAnchor, width: 250, height: 30, topPadding: 30)
     }
     
     private func addSubViews(){
@@ -84,6 +93,7 @@ final class LoginViewController: UIViewController {
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
+        view.addSubview(passwordUpdateButton)
         view.addSubview(moveToSignUpButton)
     }
 
@@ -114,6 +124,13 @@ final class LoginViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
+        passwordUpdateButton.rx.tap.asDriver().drive { [ weak self ] _ in
+            self?.showSendPasswordAlert()
+            
+            
+        }
+        .disposed(by: disposeBag)
+        
         viewModel.validLoginDriver.drive { validAll in
             self.loginButton.isEnabled = validAll
             self.loginButton.backgroundColor = validAll ? .secondColor?.withAlphaComponent(0.9) : .init(white: 0.9, alpha: 0.9)
@@ -140,6 +157,38 @@ final class LoginViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
+    
+    func alert(title:String,message:String,actiontitle:String) {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: actiontitle, style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    
+    private func showSendPasswordAlert() {
+        print(#function)
+        
+        let remindPasswordAlert = UIAlertController(title: "パスワードをリセット", message: "メールアドレスを入力してください", preferredStyle: .alert)
+               remindPasswordAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+               remindPasswordAlert.addAction(UIAlertAction(title: "リセット", style: .default, handler: { (action) in
+                   let resetEmail = remindPasswordAlert.textFields?.first?.text
+                   Auth.auth().sendPasswordReset(withEmail: resetEmail!, completion: { (error) in
+                       DispatchQueue.main.async {
+                           if error != nil {
+                               self.alert(title: "メールを送信しました。", message: "メールでパスワードの再設定を行ってください。", actiontitle: "OK")
+                           } else {
+                               self.alert(title: "エラー", message: "このメールアドレスは登録されてません。", actiontitle: "OK")
+                           }
+                       }
+                   })
+               }))
+               remindPasswordAlert.addTextField { (textField) in
+                   textField.placeholder = "test@gmail.com"
+               }
+               self.present(remindPasswordAlert, animated: true, completion: nil)
+    }
+
+//
+    
 }
 
 //MARK: - UITextFieldDelegate

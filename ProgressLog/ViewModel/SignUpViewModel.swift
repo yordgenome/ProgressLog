@@ -8,20 +8,20 @@
 import RxSwift
 import RxCocoa
 
-protocol RegisterViewModelInputs {
+protocol SignUpViewModelInputs {
     var nameTextInput: AnyObserver<String> { get }
     var emailTextInput: AnyObserver<String> { get }
     var passwordTextInput: AnyObserver<String> { get }
 }
 
-protocol RegisterViewModelOutputs {
+protocol SignUpViewModelOutputs {
     var nameTextOutput: PublishSubject<String> { get }
     var emailTextOutput: PublishSubject<String> { get }
     var passwordTextOutput: PublishSubject<String> { get }
 }
 
 // RegisterViewControllerのvalidation
-class RegisterViewModel: RegisterViewModelInputs, RegisterViewModelOutputs{
+class SignUpViewModel: SignUpViewModelInputs, SignUpViewModelOutputs{
     
     private let disposeBag = DisposeBag()
     
@@ -29,8 +29,10 @@ class RegisterViewModel: RegisterViewModelInputs, RegisterViewModelOutputs{
     
     var nameTextOutput = PublishSubject<String>()
     var emailTextOutput = PublishSubject<String>()
+    var email2TextOutput = PublishSubject<Bool>()
     var passwordTextOutput = PublishSubject<String>()
-    
+    var password2TextOutput = PublishSubject<Bool>()
+
     var validRegisterSubject = BehaviorSubject<Bool>(value: false)
     
     // MARK: - Observer
@@ -43,8 +45,16 @@ class RegisterViewModel: RegisterViewModelInputs, RegisterViewModelOutputs{
         emailTextOutput.asObserver()
     }
     
+    var email2TextInput: AnyObserver<Bool> {
+        email2TextOutput.asObserver()
+    }
+    
     var passwordTextInput: AnyObserver<String> {
         passwordTextOutput.asObserver()
+    }
+    
+    var password2TextInput: AnyObserver<Bool> {
+        password2TextOutput.asObserver()
     }
     
     var validRegisterDriver: Driver<Bool> = Driver.never()
@@ -66,13 +76,20 @@ class RegisterViewModel: RegisterViewModelInputs, RegisterViewModelOutputs{
                 return self.validateEmail(candidate: text)
             }
         
+        let email2Valid = email2TextOutput
+            .asObservable()
+        
+        
         let passwordValid = passwordTextOutput
             .asObservable()
             .map { text -> Bool in
                 return text.count >= 6
             }
         
-        Observable.combineLatest(nameValid, emailValid, passwordValid ) { $0 && $1 && $2 }
+        let password2Valid = password2TextOutput
+            .asObservable()
+        
+        Observable.combineLatest(nameValid, emailValid, email2Valid, passwordValid, password2Valid) { $0 && $1 && $2 && $3 && $4}
             .subscribe { validAll in
                 self.validRegisterSubject.onNext(validAll)
             }
