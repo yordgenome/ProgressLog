@@ -12,15 +12,16 @@ import FirebaseAuth
 import FirebaseFirestore
 
 
-class SettingsViewController: UIViewController, UITextFieldDelegate {
+final class SettingsViewController: UIViewController, UITextFieldDelegate {
     
-    let headerView = SettingsHeaderView()
-    let footerView = FooterView()
-    let disposeBag = DisposeBag()
-    
+// MARK: - Properties
+    private let disposeBag = DisposeBag()
     private var workoutData: [WorkoutModel] = []
     private var workoutMenuArray: [WorkoutMenu] = []
     
+// MARK: - UIParts
+    let headerView = SettingsHeaderView()
+    let footerView = FooterView()
     private let nameLabel = SignUpLabel(text: "名前", fontColor: UIColor.outColor!)
     private let nameTextLabel: UILabel = SettingLabel()
     private let emailLabel = SignUpLabel(text: "メールアドレス", fontColor: UIColor.outColor!)
@@ -36,8 +37,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     private let maxVolumeLabel = SettingLabel(text: "最大のトレーニングボリューム")
     private let maxVolumeTextLabel: UILabel = SettingLabel()
     
-    
-    let datePicker: UIDatePicker = {
+    private let datePicker: UIDatePicker = {
         let dp = UIDatePicker()
         dp.datePickerMode = .date
         dp.locale = Locale.current
@@ -46,7 +46,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         return dp
     }()
     
-    let logoutButton: UIButton = {
+    private let logoutButton: UIButton = {
        let button = UIButton()
         button.setTitle("ログアウト", for: .normal)
         button.layer.cornerRadius = 10
@@ -55,7 +55,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    
+// MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,23 +69,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         setupDatePicker()
     }
     
-    func setupLayout() {
-        view.addSubview(headerView)
-        view.addSubview(footerView)
-        view.addSubview(logoutButton)
-        
-        view.addSubview(nameLabel)
-        view.addSubview(emailLabel)
-        view.addSubview(nameTextLabel)
-        view.addSubview(emailTextLabel)
-        view.addSubview(baseDateLabel)
-        view.addSubview(baseDateTextField)
-        view.addSubview(baseVolumeLabel)
-        view.addSubview(baseVolumeTextLabel)
-        view.addSubview(maxDateLabel)
-        view.addSubview(maxDateTextLabel)
-        view.addSubview(maxVolumeLabel)
-        view.addSubview(maxVolumeTextLabel)
+    private func setupLayout() {
+        addsubViews()
         
         headerView.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, centerX: view.centerXAnchor, width: view.frame.width, bottomPadding: -36)
         footerView.anchor(bottom: view.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 80)
@@ -120,6 +105,25 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             maxDateTextLabel.text = "トレーニング履歴がありません"
             maxVolumeTextLabel.text = " 0KG"
         }
+    }
+    
+    private func addsubViews() {
+        view.addSubview(headerView)
+        view.addSubview(footerView)
+        view.addSubview(logoutButton)
+        
+        view.addSubview(nameLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(nameTextLabel)
+        view.addSubview(emailTextLabel)
+        view.addSubview(baseDateLabel)
+        view.addSubview(baseDateTextField)
+        view.addSubview(baseVolumeLabel)
+        view.addSubview(baseVolumeTextLabel)
+        view.addSubview(maxDateLabel)
+        view.addSubview(maxDateTextLabel)
+        view.addSubview(maxVolumeLabel)
+        view.addSubview(maxVolumeTextLabel)
     }
     
     private func setupDatePicker() {

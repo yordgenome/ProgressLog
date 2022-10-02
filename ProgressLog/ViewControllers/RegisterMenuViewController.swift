@@ -31,18 +31,20 @@ final class RegisterMenuViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let viewModel = SetTargetViewModel()
-    private let gradientView = GradientView()
+    var workoutMenuArray = [WorkoutMenu]()
+
+// MARK: - UIParts
     private let footerView = FooterView()
     private let headerView = RegisterMenuHeaderView()
     private let setTargetView = SetTargetView()
-    var workoutMenuArray = [WorkoutMenu]()
     
-    let workoutMenuTableView: UITableView = {
+    private let workoutMenuTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(RegsterMenuCell.self, forCellReuseIdentifier: RegsterMenuCell.identifier)
         return tableView
     }()
-        
+
+// MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .accentColor
@@ -63,13 +65,12 @@ final class RegisterMenuViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(gradientView)
+//        view.addSubview(gradientView)
         view.addSubview(headerView)
         view.addSubview(setTargetView)
         view.addSubview(footerView)
         view.addSubview(workoutMenuTableView)
         
-//        gradientView.frame = view.bounds
         headerView.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, centerX: view.centerXAnchor, width: view.frame.width, bottomPadding: -36)
         setTargetView.anchor(top: headerView.bottomAnchor, centerX: view.centerXAnchor, width: view.frame.width, height: 54)
         workoutMenuTableView.anchor(top: setTargetView.bottomAnchor, bottom: footerView.topAnchor, left: view.leftAnchor, right: view.rightAnchor)

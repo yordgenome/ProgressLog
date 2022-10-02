@@ -47,7 +47,7 @@ class WorkoutCell: UITableViewCell {
         return label
     }()
     
-    let TotalVolumeLabel: UILabel = {
+    let volumeLabel: UILabel = {
         let label = UILabel()
         
         return label
@@ -114,7 +114,7 @@ class WorkoutCell: UITableViewCell {
         //        addSubview(leftDecoLabel)
         addSubview(targetPartLabel)
         addSubview(menuLabel)
-        addSubview(TotalVolumeLabel)
+        addSubview(volumeLabel)
         addSubview(volumeTextLabel)
         addSubview(weightLabel)
         addSubview(batsuLabel)
@@ -124,10 +124,10 @@ class WorkoutCell: UITableViewCell {
         targetPartLabel.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, height: 18, leftPadding: 20)
         menuLabel.anchor(top: targetPartLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, height: 25, leftPadding: 20)
         volumeTextLabel.anchor(top: topAnchor, right: rightAnchor, width: 80, height: 18)
-        TotalVolumeLabel.anchor(top: volumeTextLabel.bottomAnchor, right: rightAnchor, width: 80, height: 25)
-        weightLabel.anchor(top: TotalVolumeLabel.bottomAnchor, left: leftAnchor, width: 80, height: 20, topPadding: 5, leftPadding: 40)
-        batsuLabel.anchor(top: TotalVolumeLabel.bottomAnchor, left: weightLabel.rightAnchor, width: 20, height: 20, topPadding: 5, leftPadding: 20)
-        repsLabel.anchor(top: TotalVolumeLabel.bottomAnchor, left: batsuLabel.rightAnchor, width: 60, height: 20, topPadding: 5, leftPadding: 20)
+        volumeLabel.anchor(top: volumeTextLabel.bottomAnchor, right: rightAnchor, width: 80, height: 25)
+        weightLabel.anchor(top: volumeLabel.bottomAnchor, left: leftAnchor, width: 80, height: 20, topPadding: 5, leftPadding: 40)
+        batsuLabel.anchor(top: volumeLabel.bottomAnchor, left: weightLabel.rightAnchor, width: 20, height: 20, topPadding: 5, leftPadding: 20)
+        repsLabel.anchor(top: volumeLabel.bottomAnchor, left: batsuLabel.rightAnchor, width: 60, height: 20, topPadding: 5, leftPadding: 20)
         
         
         

@@ -21,7 +21,6 @@
 		A1023C99288582E1000AB818 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023C98288582E1000AB818 /* DateUtils.swift */; };
 		A1023C9C28858389000AB818 /* UIImage-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023C9B28858389000AB818 /* UIImage-Extension.swift */; };
 		A1023CA1288584DF000AB818 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA0288584DF000AB818 /* WorkoutModel.swift */; };
-		A1023CA328858532000AB818 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA228858532000AB818 /* User.swift */; };
 		A1023CA8288585C9000AB818 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CA7288585C9000AB818 /* GradientView.swift */; };
 		A1023CAE288586DB000AB818 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CAD288586DB000AB818 /* SignUpViewController.swift */; };
 		A1023CB12885871A000AB818 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1023CB028858719000AB818 /* SignUpViewModel.swift */; };
@@ -57,6 +56,7 @@
 		A13B4D7728CF80B600D13441 /* SettingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7628CF80B600D13441 /* SettingTextField.swift */; };
 		A13B4D7928D7AC3700D13441 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13B4D7828D7AC3700D13441 /* ResultView.swift */; };
 		A1936D82289024C100315381 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1936D81289024C100315381 /* FooterView.swift */; };
+		A1F6160928E2032C008A23CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F6160828E2032C008A23CB /* User.swift */; };
 		C33392F1D5FF3C75A960AB9A /* Pods_ProgressLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE5C8503AE71D1BB1D1BF62 /* Pods_ProgressLog.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,7 +104,6 @@
 		A1023C98288582E1000AB818 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		A1023C9B28858389000AB818 /* UIImage-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage-Extension.swift"; sourceTree = "<group>"; };
 		A1023CA0288584DF000AB818 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
-		A1023CA228858532000AB818 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1023CA7288585C9000AB818 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		A1023CAD288586DB000AB818 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A1023CB028858719000AB818 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		A13B4D7628CF80B600D13441 /* SettingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTextField.swift; sourceTree = "<group>"; };
 		A13B4D7828D7AC3700D13441 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		A1936D81289024C100315381 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		A1F6160828E2032C008A23CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD5C39408399D51873A4F729 /* Pods-ProgressLog-ProgressLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressLog-ProgressLogUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAE5C8503AE71D1BB1D1BF62 /* Pods_ProgressLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProgressLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA55ECA4D54147ADDAC767E /* Pods-ProgressLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressLog.release.xcconfig"; path = "Target Support Files/Pods-ProgressLog/Pods-ProgressLog.release.xcconfig"; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 		A1023C9F28858456000AB818 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A1F6160828E2032C008A23CB /* User.swift */,
 				A1023CA0288584DF000AB818 /* WorkoutModel.swift */,
-				A1023CA228858532000AB818 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				A1023C5828847700000AB818 /* Sources */,
 				A1023C5928847700000AB818 /* Frameworks */,
 				A1023C5A28847700000AB818 /* Resources */,
-				BECF9112E6AFDF649E6C4371 /* [CP] Embed Pods Frameworks */,
+				E0E65ABD62D5243E43904442 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -423,7 +423,7 @@
 				A1023C7828847703000AB818 /* Sources */,
 				A1023C7928847703000AB818 /* Frameworks */,
 				A1023C7A28847703000AB818 /* Resources */,
-				5E23017E33F18DB60D01365C /* [CP] Embed Pods Frameworks */,
+				EAF6E7512B0808D66866256D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -551,23 +551,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5E23017E33F18DB60D01365C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6E6A30BAD278B22889B87DB5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -590,7 +573,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BECF9112E6AFDF649E6C4371 /* [CP] Embed Pods Frameworks */ = {
+		E0E65ABD62D5243E43904442 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -607,6 +590,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProgressLog/Pods-ProgressLog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EAF6E7512B0808D66866256D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProgressLog-ProgressLogUITests/Pods-ProgressLog-ProgressLogUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -620,7 +620,6 @@
 				A1023C95288580B0000AB818 /* UIColor-Extension.swift in Sources */,
 				A1023C9C28858389000AB818 /* UIImage-Extension.swift in Sources */,
 				A1023CD828858CC0000AB818 /* UserModel.swift in Sources */,
-				A1023CA328858532000AB818 /* User.swift in Sources */,
 				A1023C97288580F1000AB818 /* UserDefaults-Extension.swift in Sources */,
 				A1936D82289024C100315381 /* FooterView.swift in Sources */,
 				A1023C99288582E1000AB818 /* DateUtils.swift in Sources */,
@@ -633,6 +632,7 @@
 				A1023CA8288585C9000AB818 /* GradientView.swift in Sources */,
 				A1023CD628858C56000AB818 /* SetTargetViewModel.swift in Sources */,
 				A1023CD428858C44000AB818 /* SetWorkoutViewModel.swift in Sources */,
+				A1F6160928E2032C008A23CB /* User.swift in Sources */,
 				A1023CC52885896E000AB818 /* SetWorkoutView.swift in Sources */,
 				A1023CD228858C00000AB818 /* SetTargetView.swift in Sources */,
 				A13B4D7528CF5B9100D13441 /* SettingLabel.swift in Sources */,

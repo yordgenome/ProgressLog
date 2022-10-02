@@ -16,10 +16,9 @@ final class LoginViewController: UIViewController {
     let disposeBag = DisposeBag()
     private let viewModel = LoginViewModel()
     
+// MARK: - UIParts
     private let gradientView = CellBackgroundView()
-    
     private let productLabel = SignUpLabel(text: "ログイン", font: UIFont(name: "DevanagariSangamMN-Bold", size: 36)!)
-
     private let passwordLabel = SignUpLabel(text: "パスワード")
     private let emailLabel = SignUpLabel(text: "メールアドレス")
     
@@ -27,9 +26,7 @@ final class LoginViewController: UIViewController {
     private let passwordTextField = SignUptTextField(placeholder: "パスワード", tag: 1, returnKeyType: .done)
 
     private let loginButton = SignUpButton(text: "ログイン")
-    
-    private let passwordUpdateButton = SignUpButton()
-
+        private let passwordUpdateButton = SignUpButton()
 
     private let moveToSignUpButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -45,19 +42,7 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
-//    private let setButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Set", for: .normal)
-//        button.backgroundColor = .red
-//        return button
-//    }()
-//    private let getButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Get", for: .normal)
-//        button.backgroundColor = .red
-//        return button
-//    }()
-    
+// MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -97,6 +82,7 @@ final class LoginViewController: UIViewController {
         view.addSubview(moveToSignUpButton)
     }
 
+// MARK: - Bindings
     private func setupBindings() {
         
         emailTextField.rx.text
@@ -126,8 +112,6 @@ final class LoginViewController: UIViewController {
         
         passwordUpdateButton.rx.tap.asDriver().drive { [ weak self ] _ in
             self?.showSendPasswordAlert()
-            
-            
         }
         .disposed(by: disposeBag)
         
@@ -186,9 +170,6 @@ final class LoginViewController: UIViewController {
                }
                self.present(remindPasswordAlert, animated: true, completion: nil)
     }
-
-//
-    
 }
 
 //MARK: - UITextFieldDelegate
@@ -209,7 +190,5 @@ extension LoginViewController: UITextFieldDelegate {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-        
     }
-
 }

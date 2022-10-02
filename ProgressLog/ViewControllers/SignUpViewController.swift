@@ -12,12 +12,14 @@ import RxSwift
 import RxCocoa
 
 final class SignUpViewController: UIViewController {
-    
+
+// MARK: - Properties
     private var workoutArray: [WorkoutModel] = []
-    
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private let viewModel = SignUpViewModel()
     
+    
+// MARK: - UIParts
     private let gradientView = CellBackgroundView()
     
     private let productLabel = SignUpLabel(text: "Progress Log", font: UIFont(name: "DevanagariSangamMN-Bold", size: 50)!)
@@ -51,6 +53,7 @@ final class SignUpViewController: UIViewController {
         return button
     }()
     
+// MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,7 +107,8 @@ final class SignUpViewController: UIViewController {
         view.addSubview(registerButton)
         view.addSubview(moveToLoginButton)
     }
-    
+
+// MARK: - Bindings
     private func setupBindings() {
         
         nameTextField.rx.text
