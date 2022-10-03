@@ -13,7 +13,7 @@ import RxCocoa
 
 final class LoginViewController: UIViewController {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private let viewModel = LoginViewModel()
     
 // MARK: - UIParts
@@ -54,7 +54,7 @@ final class LoginViewController: UIViewController {
         setupBindings()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         addSubViews()
         passwordTextField.isSecureTextEntry = true
         if #available(iOS 12.0, *) { passwordTextField.textContentType = .oneTimeCode }
@@ -138,15 +138,9 @@ final class LoginViewController: UIViewController {
     private func showAlert(title: String, message: String?) {
         print(#function)
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    
-    func alert(title:String,message:String,actiontitle:String) {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: actiontitle, style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
     
     private func showSendPasswordAlert() {
         print(#function)
@@ -158,9 +152,9 @@ final class LoginViewController: UIViewController {
                    Auth.auth().sendPasswordReset(withEmail: resetEmail!, completion: { (error) in
                        DispatchQueue.main.async {
                            if error != nil {
-                               self.alert(title: "メールを送信しました。", message: "メールでパスワードの再設定を行ってください。", actiontitle: "OK")
+                               self.showAlert(title: "メールを送信しました。", message: "メールでパスワードの再設定を行ってください。")
                            } else {
-                               self.alert(title: "エラー", message: "このメールアドレスは登録されてません。", actiontitle: "OK")
+                               self.showAlert(title: "エラー", message: "このメールアドレスは登録されてません。")
                            }
                        }
                    })

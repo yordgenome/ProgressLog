@@ -13,39 +13,33 @@ import RxCocoa
 import Charts
 
 class HomeViewController: UIViewController {
-    
     //MARK: - Properties
-    let gradientView = GradientView()
-    let footerView = FooterView()
-    let headerView: UIView = HomeHeader()
+    private var user: User?
+    private let today = Date()
     
-    let textLabel: UILabel = {
+    //MARK: - UIParts
+    private let gradientView = GradientView()
+    private let footerView = FooterView()
+    private let headerView: UIView = HomeHeader()
+    private let resultView = ResultView()
+    private let disposeBag = DisposeBag()
+    private let textLabel: UILabel = {
         let label =  UILabel()
         label.text = "トレーニングボリューム成長率"
         label.textAlignment = .center
         label.textColor = UIColor.baseColor
         label.font = UIFont(name: "GeezaPro-Bold", size: 20)
-        
         return label
     }()
-    
-    let resultView = ResultView()
 
-    var user: User?
-    let today = Date()
-
-    let disposeBag = DisposeBag()
-    
+    //MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .accentColor
-        
-        
         setupLayout()
         setupBinding()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -63,9 +57,7 @@ class HomeViewController: UIViewController {
                 UserData.createdAt = user?.createdAt ?? Timestamp()
             }
         }
-        
         UserData.baseVolume = UserDefaults.standard.double(forKey: "baseVolume")
-        
     }
     
     private func setupLayout() {
@@ -80,11 +72,10 @@ class HomeViewController: UIViewController {
         footerView.anchor(bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: view.bounds.width, height: 80)
         
         resultView.resultLabel.text = resultText()
-
     }
     
     private func setupBinding() {
-
+        
         footerView.menuView.button?.rx.tap.asDriver().drive(onNext: { [weak self] in
             let regiWorkoutVC = RegisterMenuViewController()
             regiWorkoutVC.modalPresentationStyle = .fullScreen
@@ -106,9 +97,9 @@ class HomeViewController: UIViewController {
             settingsVC.modalTransitionStyle = .crossDissolve
             self?.present(settingsVC, animated: true)})
         .disposed(by: disposeBag)
-        }
+    }
     
-    func resultText() -> String {
+    private func resultText() -> String {
         if let base = UserDefaults.standard.getBaseVolume(), let max = UserDefaults.standard.getMaxVolume() {
             let baseNum = base["volume"] as! Double
             let maxNum = max["volume"] as! Double

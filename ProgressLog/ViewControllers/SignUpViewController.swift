@@ -66,7 +66,7 @@ final class SignUpViewController: UIViewController {
         setupBindings()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         addSubViews()
         passwordTextField.isSecureTextEntry = true
         if #available(iOS 12.0, *) { passwordTextField.textContentType = .oneTimeCode }
@@ -185,13 +185,6 @@ final class SignUpViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    
-    
-    func moveToLogin() {
-        let login = LoginViewController()
-        present(login, animated: true)
-    }
-    
 }
 
 //MARK: - UITextFieldDelegate
@@ -218,8 +211,6 @@ extension SignUpViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-        
     }
-    
 }
 

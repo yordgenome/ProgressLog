@@ -292,7 +292,6 @@ final class WorkoutViewController: UIViewController {
     }
     
     private func updateBaseAndMaxVolume() {
-        
         if UserDefaults.standard.getBaseVolume() == nil {
             print("BaseVolumeがnilだよ")
             UserDefaults.standard.setBaseVolume(dateString: DateUtils.toStringFromDate(date: self.currentDate!), volume: self.totalVolume())
